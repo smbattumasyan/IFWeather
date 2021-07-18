@@ -14,16 +14,17 @@ protocol CurrentWeatherViewModelDelegate: NSObject {
 
 class CurrentWeatherViewModel: NSObject {
     
+    // MARK: - Public Properties
     weak var delegate: CurrentWeatherViewModelDelegate?
     
+    // MARK: - Public Methods
     func requestWeather(lat: Double, lon: Double) {
         NetworkService.shared.request(WeatherEndpoint.get(lat: "\(lat)", lon: "\(lon)")) { (result: Result<CurrentWeather>) in
             switch result {
             case .success(let currentWeather):
-                print(currentWeather)
                 self.delegate?.parseCurrentWeatherSuccess(currentWeather)
             case .failure(let error):
-                print(error)
+                self.delegate?.parseCurrentWeatherWithMessage(error.localizedDescription)
             }
         }
     }

@@ -14,6 +14,7 @@ protocol DailyWeatherViewModelDelegate: AnyObject {
 
 class DailyWeatherViewModel: NSObject {
     
+    // MARK: - Public Properties
     weak var delegate: DailyWeatherViewModelDelegate?
     var dailyWeather: DailyWeather? {
         didSet {
@@ -21,14 +22,14 @@ class DailyWeatherViewModel: NSObject {
         }
     }
     
+    // MARK: - Public Methods
     func requestWeather(lat: Double, lon: Double) {
         NetworkService.shared.request(DailyWeatherEndpoint.get(lat: "\(lat)", lon: "\(lon)")) { (result: Result<DailyWeather>) in
             switch result {
             case .success(let dailyWeather):
-                print(dailyWeather)
                 self.dailyWeather = dailyWeather
             case .failure(let error):
-                print(error)
+                self.delegate?.parseDailyWeatherWithMessage(error.localizedDescription)
             }
         }
     }

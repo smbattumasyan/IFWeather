@@ -44,8 +44,6 @@ extension NetworkService {
         
         // Otherwise, request from server
         let task = session.dataTask(with: request) { [weak self] data, response, error in
-            
-            print(response)
             self?.taskManager.removeTask(forRequest: request)
             
             if let error = error as NSError? {
@@ -86,20 +84,6 @@ private extension NetworkService {
             return .failure(NetworkError.decodingFailed)
         }
     }
-    
-//    func decodedWithManagedObjectContext<T: Decodable>(_ type: T.Type, data: Data) -> Result<T> {
-//        let managedObjectContext = CoreDataStorage.shared.managedObjectContext()
-//        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
-//            fatalError("Failed to retrieve managed object context Key")
-//        }
-//        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
-//        do {
-//            let object = try decoder.decode(T.self, from: data)
-//            return .success(object)
-//        } catch {
-//            return .failure(NetworkError.decodingFailed)
-//        }
-//    }
 }
 
 // MARK: - Network Error

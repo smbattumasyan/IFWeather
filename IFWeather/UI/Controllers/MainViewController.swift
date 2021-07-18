@@ -10,6 +10,7 @@ import CoreLocation
 
 class MainViewController: UIViewController {
     
+    // MARK: - IBOutlet
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -19,6 +20,7 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Private Properties
     private var locationManager = CLLocationManager()
     private var currentWeatherViewModel: CurrentWeatherViewModel?
     private var dailyWeatherViewModel: DailyWeatherViewModel?
@@ -38,6 +40,7 @@ class MainViewController: UIViewController {
         
     }
 
+    // MARK: - Life Cyrcle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,30 +52,15 @@ class MainViewController: UIViewController {
         setupLocation()
     }
     
+    
+    // MARK: - Private Methods
     private func setupLocation() {
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            switch locationAuthorizationStatus {
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("Authorize.")
-                break
-            case .notDetermined:
-                print("Not determined.")
-            case .restricted:
-                print("Restricted.")
-            case .denied:
-                print("Denied.")
-            @unknown default:
-                break
-            }
-        }
     }
     
     private func setupWeather(_ weather: Weather) {
@@ -107,6 +95,7 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension MainViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
@@ -119,8 +108,11 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-        case .restricted, .denied, .notDetermined:
+        case .restricted, .notDetermined:
             break
+        case .denied:
+            let alertController = UIAlertController.createSettingsAlertController(title: "Location Settings", message: "Allow access to your loction, for show current weather.")
+            self.present(alertController, animated: true, completion: nil)
         case .authorizedAlways: fallthrough
         case .authorizedWhenInUse:
             print("Location status is OK.")
@@ -135,6 +127,7 @@ extension MainViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - CurrentWeatherViewModelDelegate
 extension MainViewController: CurrentWeatherViewModelDelegate {
     func parseCurrentWeatherSuccess(_ currentWeather: CurrentWeather) {
         addressLabel.text = currentWeather.name
@@ -151,6 +144,7 @@ extension MainViewController: CurrentWeatherViewModelDelegate {
     }
 }
 
+// MARK: - DailyWeatherViewModelDelegate
 extension MainViewController: DailyWeatherViewModelDelegate {
     func parseDailyWeatherSuccess() {
         tableView.reloadData()
@@ -161,6 +155,7 @@ extension MainViewController: DailyWeatherViewModelDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dailyWeatherViewModel?.dailyWeather?.days.count ?? 0

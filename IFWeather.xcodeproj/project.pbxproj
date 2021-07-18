@@ -40,6 +40,7 @@
 		173BFC6126A41152004633AC /* DayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173BFC6026A41152004633AC /* DayTableViewCell.swift */; };
 		17FA191526A4173B00FB58A9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA191426A4173B00FB58A9 /* Date+Extension.swift */; };
 		17FA191726A418C900FB58A9 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA191626A418C900FB58A9 /* DayViewModel.swift */; };
+		17FA191926A42B3A00FB58A9 /* UIAlertController+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA191826A42B3A00FB58A9 /* UIAlertController+Extention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		173BFC6026A41152004633AC /* DayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewCell.swift; sourceTree = "<group>"; };
 		17FA191426A4173B00FB58A9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		17FA191626A418C900FB58A9 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
+		17FA191826A42B3A00FB58A9 /* UIAlertController+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extention.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 			children = (
 				173BFC3426A0BF27004633AC /* UIViewController+Extension.swift */,
 				17FA191426A4173B00FB58A9 /* Date+Extension.swift */,
+				17FA191826A42B3A00FB58A9 /* UIAlertController+Extention.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				173BFC5126A3FA70004633AC /* MainWeatherViewModel.swift in Sources */,
 				173BFC2F26A0BE1D004633AC /* StoryboardName.swift in Sources */,
 				173BFC4F26A20694004633AC /* WeatherViewModel.swift in Sources */,
+				17FA191926A42B3A00FB58A9 /* UIAlertController+Extention.swift in Sources */,
 				173BFC5726A40833004633AC /* DailyWeather.swift in Sources */,
 				173BFC0A26A0AEA1004633AC /* AppDelegate.swift in Sources */,
 				173BFC5B26A40A99004633AC /* DailyWeatherEndpoint.swift in Sources */,
