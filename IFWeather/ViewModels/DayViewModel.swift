@@ -15,7 +15,7 @@ class DayViewModel: ViewModelType {
     struct Output {
         let weekday: String
         let minMaxTemp: NSAttributedString
-        let weather: [Weather]
+        let iconURL: String
     }
     
     func transform(_ input: Input) -> Output {
@@ -25,8 +25,8 @@ class DayViewModel: ViewModelType {
         let attributedString = NSMutableAttributedString()
         attributedString.append(addAttributedString(text: max, color: .black))
         attributedString.append(addAttributedString(text: min, color: UIColor.black.withAlphaComponent(0.5)))
-
-        return Output(weekday: weekday, minMaxTemp: attributedString, weather: input.day.weather)
+        let iconURL = "http://openweathermap.org/img/w/\(input.day.weather.first?.icon ?? "").png"
+        return Output(weekday: weekday, minMaxTemp: attributedString, iconURL: iconURL)
     }
     
     private func addAttributedString(text: String, color: UIColor) -> NSAttributedString {
