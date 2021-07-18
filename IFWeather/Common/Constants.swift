@@ -8,5 +8,5 @@
 import Foundation
 
 struct Constants {
-    static let APP_ID = "bc9c34bc592e1f58d9f60a96df6e854d"
+    static let APP_ID = "51e509f1096a2fb8e739ed1e51b4ac8c"
 }

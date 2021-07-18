@@ -1,17 +1,17 @@
 //
-//  WeatherEndpoint.swift
+//  DailyWeatherEndpoint.swift
 //  IFWeather
 //
-//  Created by ՍՄԲԱՏ ԹՈՒՄԱՍՅԱՆ on 15.07.21.
+//  Created by ՍՄԲԱՏ ԹՈՒՄԱՍՅԱՆ on 18.07.21.
 //
 
 import Foundation
 
-enum WeatherEndpoint {
+enum DailyWeatherEndpoint {
     case get(lat: String, lon: String)
 }
 
-extension WeatherEndpoint: Endpoint {
+extension DailyWeatherEndpoint: Endpoint {
     
     var baseUrl: String {
         return "http://api.openweathermap.org"
@@ -27,7 +27,7 @@ extension WeatherEndpoint: Endpoint {
     var path: String {
         switch self {
         case .get(_, _):
-            return "/data/2.5/weather"
+            return "/data/2.5/forecast/daily"
         }
     }
     
